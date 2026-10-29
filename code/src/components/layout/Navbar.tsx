@@ -3,8 +3,7 @@
 import React, { useState, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Coffee, ShoppingCart, Clock, MapPin } from "lucide-react";
-import { Container } from "@/components/ui/Container";
+import { Coffee, ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import CardNavComponent from "@/components/CardNav";
 import type { CardNavProps } from "@/types/card-nav";
@@ -22,16 +21,17 @@ const CARD_NAV_ITEMS = [
       { label: "Lunch & Biryani", href: "/lunch", ariaLabel: "Lunch & Biryani" },
       { label: "Fast Food & Snacks", href: "/fast-food", ariaLabel: "Fast Food & Snacks" },
       { label: "Hot & Chilled Beverages", href: "/beverages", ariaLabel: "Hot & Chilled Beverages" },
+      { label: "Desserts & Bakery", href: "/desserts", ariaLabel: "Desserts & Bakery" },
     ],
   },
   {
     label: "Shop",
-    description: "All 35 student items & academic stationery",
+    description: "All student menu items & academic stationery",
     bgColor: "#F1E3D3", // soft tan
     textColor: "#2B1B12", // deep espresso
     links: [
       { label: "All Products Catalogue", href: "/shop", ariaLabel: "All Products Catalogue" },
-      { label: "Popular Bestsellers", href: "/shop?bestseller=1", ariaLabel: "Popular Bestsellers" },
+      { label: "Desserts & Sweets", href: "/desserts", ariaLabel: "Desserts & Sweets" },
       { label: "Academic Stationery", href: "/stationery", ariaLabel: "Academic Stationery" },
     ],
   },
@@ -120,24 +120,6 @@ export function Navbar() {
           : "bg-cream/95 backdrop-blur-md border-b border-tan shadow-xs"
       }`}
     >
-      {/* Top micro-bar for university branding */}
-      <div className="bg-coffee text-cream text-[11px] sm:text-xs py-1 border-b border-coffee-dark/30">
-        <Container className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-green animate-pulse" />
-            <span>COMSATS University Islamabad • Student Campus Cafe</span>
-          </div>
-          <div className="hidden md:flex items-center gap-4 text-cream/80">
-            <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3 text-orange" /> Mon-Fri: 8:00 AM - 6:00 PM
-            </span>
-            <span className="flex items-center gap-1">
-              <MapPin className="w-3 h-3 text-orange" /> CUI Main Campus, Student Center
-            </span>
-          </div>
-        </Container>
-      </div>
-
       {/* Main Bar with CardNav Component */}
       <div className="py-2 px-3 sm:px-4 max-w-7xl mx-auto">
         <CardNav

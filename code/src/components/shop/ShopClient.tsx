@@ -17,6 +17,7 @@ import {
   LayoutGrid,
   SearchX,
   Sparkles,
+  Cake,
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { products as allProducts, getBestsellers } from "@/data/products";
@@ -34,6 +35,7 @@ const CATEGORY_TABS: { slug: string; name: string; icon: React.ComponentType<{ c
   { slug: "lunch", name: "Lunch", icon: UtensilsCrossed },
   { slug: "fast-food", name: "Fast Food", icon: Flame },
   { slug: "beverages", name: "Beverages", icon: CupSoda },
+  { slug: "desserts", name: "Desserts & Bakery", icon: Cake },
   { slug: "stationery", name: "Stationery", icon: BookOpen },
 ];
 

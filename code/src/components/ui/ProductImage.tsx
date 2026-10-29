@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Coffee, UtensilsCrossed, Flame, CupSoda, BookOpen, LucideIcon } from "lucide-react";
+import { Coffee, UtensilsCrossed, Flame, CupSoda, BookOpen, Cake, LucideIcon } from "lucide-react";
 import { CategorySlug } from "@/data/categories";
 
 interface ProductImageProps {
@@ -21,6 +21,7 @@ const CATEGORY_ICONS: Record<CategorySlug, LucideIcon> = {
   "fast-food": Flame,
   beverages: CupSoda,
   stationery: BookOpen,
+  desserts: Cake,
 };
 
 const CATEGORY_GRADIENTS: Record<CategorySlug, string> = {
@@ -29,6 +30,7 @@ const CATEGORY_GRADIENTS: Record<CategorySlug, string> = {
   "fast-food": "from-[#4B2E20] via-[#D35400] to-[#E67E22]",
   beverages: "from-[#2B1B12] via-[#4B2E20] to-[#7A5230]",
   stationery: "from-[#2B1B12] via-[#7A5230] to-[#F1E3D3]",
+  desserts: "from-[#4B2E20] via-[#9C4149] to-[#F1E3D3]",
 };
 
 export default function ProductImage({

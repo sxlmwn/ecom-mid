@@ -3,13 +3,14 @@ export type CategorySlug =
   | "lunch"
   | "fast-food"
   | "beverages"
-  | "stationery";
+  | "stationery"
+  | "desserts";
 
 export interface Category {
   slug: CategorySlug;
   name: string;
   tagline: string;
-  iconName: "Coffee" | "UtensilsCrossed" | "Flame" | "CupSoda" | "BookOpen";
+  iconName: "Coffee" | "UtensilsCrossed" | "Flame" | "CupSoda" | "BookOpen" | "Cake";
   accentColor: string;
   route: string;
 }
@@ -46,6 +47,14 @@ export const categories: Category[] = [
     iconName: "CupSoda",
     accentColor: "#4B2E20", // coffee brown
     route: "/beverages",
+  },
+  {
+    slug: "desserts",
+    name: "Desserts & Bakery",
+    tagline: "Freshly baked brownies, artisan cakes, donuts & chilled ice creams",
+    iconName: "Cake",
+    accentColor: "#9C4149", // berry chocolate
+    route: "/desserts",
   },
   {
     slug: "stationery",

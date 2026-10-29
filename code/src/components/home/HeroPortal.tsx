@@ -222,8 +222,8 @@ export function HeroPortal() {
       <div className="relative w-full overflow-hidden bg-espresso text-cream py-16 sm:py-24">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <Image
-            src="/images/final-web/00-your-cafe-1-4k.webp"
-            alt="COMSATS University CUI Cafe"
+            src="/images/09-cafe-furniture.jpg"
+            alt="COMSATS University CUI Cafe Cozy Wooden Seating and Tables"
             fill
             priority
             sizes="100vw"
@@ -308,11 +308,11 @@ export function HeroPortal() {
   };
 
   return (
-    <div className="relative w-full overflow-hidden cui-hero-container">
+    <div className="relative w-full cui-hero-container">
       <style>{`
-        /* Scoped styling for CUI Cafe Glyph Portal */
+        /* Scoped styling for CUI Cafe Glyph Portal matching demo.tsx text component specification */
         .cui-hero-container [data-gp-caption] {
-          inset: calc(var(--gp-word-bottom, 50%) + 130px) 24px auto;
+          inset: calc(var(--gp-word-bottom, 50%) + 128px) 24px auto;
           justify-content: center;
           z-index: 10;
         }
@@ -322,7 +322,7 @@ export function HeroPortal() {
         .cui-hero-container [data-gp-enter] {
           min-height: 46px;
           padding: 0 24px;
-          gap: 12px;
+          gap: 16px;
           background-color: #E67E22;
           border: 1px solid #D35400;
           border-radius: 12px;
@@ -331,7 +331,7 @@ export function HeroPortal() {
           font-size: 13px;
           font-weight: 600;
           letter-spacing: 0.02em;
-          box-shadow: 0 4px 14px rgba(230, 126, 34, 0.3);
+          box-shadow: 0 4px 14px rgba(230, 126, 34, 0.35);
           transition: all 0.2s ease;
           display: inline-flex;
           align-items: center;
@@ -340,7 +340,7 @@ export function HeroPortal() {
         .cui-hero-container [data-gp-enter]:hover {
           background-color: #D35400;
           transform: translateY(-1px);
-          box-shadow: 0 6px 18px rgba(230, 126, 34, 0.4);
+          box-shadow: 0 6px 18px rgba(230, 126, 34, 0.45);
         }
         .cui-hero-container [data-gp-enter]:focus-visible {
           outline: 2px solid #E67E22;
@@ -368,38 +368,66 @@ export function HeroPortal() {
           box-shadow: 0 2px 8px rgba(75, 46, 32, 0.08);
         }
 
-        /* Front elements layout relative to the giant word */
-        .cui-front-eyebrow {
+        /* demo.tsx text component specification styles */
+        .cui-hero-container [data-sublime-header] {
+          position: absolute;
+          inset: clamp(16px, 3.5vw, 32px) clamp(20px, 4vw, 48px) auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+          z-index: 12;
+          pointer-events: none;
+        }
+        .cui-hero-container [data-sublime-logo] {
+          font-size: clamp(16px, 1.8vw, 20px);
+          font-weight: 700;
+          letter-spacing: -0.04em;
+          color: #2B1B12;
+          font-family: var(--font-playfair), Georgia, serif;
+        }
+        .cui-hero-container [data-sublime-category] {
+          font-size: 12px;
+          line-height: 1.5;
+          color: #4B2E20;
+          opacity: 0.85;
+          font-weight: 500;
+          font-family: var(--font-poppins), system-ui, sans-serif;
+        }
+        .cui-hero-container [data-sublime-eyebrow] {
           position: absolute;
           inset: auto 24px calc(100% - var(--gp-word-top, 35%) + 24px);
           margin: 0;
           text-align: center;
           font-family: var(--font-poppins), system-ui, sans-serif;
-          font-size: clamp(11px, 1.3vw, 14px);
+          font-size: clamp(11px, 1.2vw, 13px);
           font-weight: 600;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
           color: #4B2E20;
         }
-        .cui-front-support {
+        .cui-hero-container [data-sublime-support] {
           position: absolute;
-          inset: calc(var(--gp-word-bottom, 50%) + 20px) 24px auto;
+          inset: calc(var(--gp-word-bottom, 50%) + 18px) 24px auto;
           margin: 0;
           left: 50%;
           transform: translateX(-50%);
-          width: min(calc(100% - 48px), 46ch);
+          width: min(calc(100% - 48px), 48ch);
           text-align: center;
           font-family: var(--font-poppins), system-ui, sans-serif;
-          font-size: clamp(14px, 1.8vw, 18px);
+          font-size: clamp(14px, 1.6vw, 17px);
           font-weight: 500;
           line-height: 1.5;
           color: #2B1B12;
         }
-        .cui-front-buttons {
+        .cui-hero-container .cui-front-buttons {
           position: absolute;
-          inset: calc(var(--gp-word-bottom, 50%) + 76px) 24px auto;
+          top: calc(var(--gp-word-bottom, 50%) + 72px);
           left: 50%;
+          right: auto;
           transform: translateX(-50%);
+          width: max-content;
+          max-width: calc(100% - 32px);
           display: flex;
           flex-wrap: wrap;
           align-items: center;
@@ -407,29 +435,100 @@ export function HeroPortal() {
           gap: 12px;
           z-index: 15;
         }
-        .cui-front-scroll {
+        .cui-hero-container [data-sublime-scroll] {
           position: absolute;
-          inset: auto 24px 4%;
+          inset: auto 24px clamp(68px, 9vh, 88px);
           text-align: center;
           font-family: var(--font-poppins), system-ui, sans-serif;
+          color: #4B2E20;
           font-size: 12px;
           font-weight: 500;
-          letter-spacing: 0.04em;
-          color: #4B2E20;
-          opacity: 0.8;
+          letter-spacing: 0.02em;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 6px;
+          opacity: 0.85;
         }
         @media (any-pointer: coarse) {
-          .cui-front-scroll {
-            bottom: 12%;
+          .cui-hero-container [data-sublime-scroll] {
+            bottom: clamp(72px, 11vh, 92px);
           }
         }
         @media (max-height: 520px) {
-          .cui-front-scroll {
+          .cui-hero-container [data-sublime-scroll] {
             display: none;
+          }
+        }
+        @media (max-width: 640px) {
+          .cui-hero-container .cui-front-buttons {
+            top: calc(var(--gp-word-bottom, 50%) + 62px);
+            gap: 8px;
+          }
+          .cui-hero-container [data-gp-caption] {
+            top: calc(var(--gp-word-bottom, 50%) + 124px);
+          }
+        }
+
+        /* Revealed slipstream copy and features layout */
+        .cui-hero-container [data-slipstream-copy] {
+          display: flex;
+          width: min(100%, 80rem);
+          margin: auto;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: clamp(2rem, 4svh, 3rem);
+        }
+        .cui-hero-container [data-slipstream-copy] h2 {
+          max-width: 48rem;
+          margin: 0;
+          color: #FFF8F0;
+          font-size: clamp(1.75rem, 1.1rem + 2.1vw, 2.75rem);
+          font-weight: 700;
+          line-height: 1.2;
+          letter-spacing: -0.02em;
+          text-wrap: balance;
+        }
+        .cui-hero-container [data-slipstream-features] {
+          display: grid;
+          width: 100%;
+          grid-template-columns: 1fr;
+          gap: 1.75rem;
+        }
+        .cui-hero-container [data-slipstream-feature] {
+          border-top: 1px solid rgba(255, 248, 240, 0.22);
+          padding-top: 1.25rem;
+          transition: border-color 0.2s ease;
+        }
+        .cui-hero-container [data-slipstream-feature]:hover {
+          border-top-color: #E67E22;
+        }
+        .cui-hero-container [data-slipstream-feature] h3 {
+          margin: 0;
+          color: #FFF8F0;
+          font-size: 1.15rem;
+          font-weight: 600;
+          line-height: 1.25;
+        }
+        .cui-hero-container [data-slipstream-feature] p {
+          margin: 0.55rem 0 0;
+          color: rgba(255, 248, 240, 0.85);
+          font-size: 0.9375rem;
+          line-height: 1.55;
+          font-family: var(--font-poppins), system-ui, sans-serif;
+        }
+        .cui-hero-container [data-slipstream-no] {
+          display: inline-block;
+          margin-right: 0.7rem;
+          color: #E67E22;
+          font: 700 0.85rem ui-monospace, monospace;
+          letter-spacing: 0.08em;
+          transform: translateY(-0.05em);
+        }
+        @media (min-width: 768px) {
+          .cui-hero-container [data-slipstream-features] {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2.5rem;
           }
         }
       `}</style>
@@ -451,26 +550,30 @@ export function HeroPortal() {
         }}
         background={
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Primary 4K cafe image from content/final-4k/ */}
+            {/* 4K cafe furniture image from content/final-4k/09-cafe-furniture.jpg */}
             <Image
-              src="/images/final-web/00-your-cafe-1-4k.webp"
-              alt="COMSATS University CUI Cafe Campus Hub"
+              src="/images/09-cafe-furniture.jpg"
+              alt="COMSATS University CUI Cafe Wooden Furniture & Cozy Seating"
               fill
               priority
               sizes="100vw"
               className="object-cover object-center"
             />
             {/* Rich dark brown overlay keeping text crisp and readable */}
-            <div className="absolute inset-0 bg-[#2B1B12]/80 backdrop-blur-[1px]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#2B1B12] via-[#4B2E20]/75 to-[#2B1B12]/85" />
+            <div className="absolute inset-0 bg-[#2B1B12]/75 backdrop-blur-[1px]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#2B1B12] via-[#4B2E20]/70 to-[#2B1B12]/85" />
           </div>
         }
         front={
           <>
-            <p className="cui-front-eyebrow">
-              COMSATS UNIVERSITY ISLAMABAD
+            <div data-sublime-header>
+              <h1 data-sublime-logo className="m-0 text-inherit font-inherit">CUI Cafe.</h1>
+              <span data-sublime-category>COMSATS Campus Dining & Supplies</span>
+            </div>
+            <p data-sublime-eyebrow>
+              COMSATS UNIVERSITY ISLAMABAD • CAMPUS HUB
             </p>
-            <p className="cui-front-support">
+            <p data-sublime-support>
               Fresh food, hot coffee and campus essentials, all in one place.
             </p>
             <div className="cui-front-buttons">
@@ -488,78 +591,72 @@ export function HeroPortal() {
                 <span>Contact Us</span>
               </Link>
             </div>
-            <div className="cui-front-scroll">
+            <span data-sublime-scroll>
               <span>Scroll to step inside</span>
               <ChevronDown className="w-3.5 h-3.5 animate-bounce" />
-            </div>
+            </span>
           </>
         }
       >
-        {/* Revealed section content on the warm brown field */}
-        <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 text-cream space-y-8 sm:space-y-10">
-          <div className="max-w-2xl space-y-3">
-            <span className="inline-block px-3.5 py-1 text-xs font-semibold tracking-wider uppercase rounded-full bg-cream/15 text-cream border border-cream/20">
+        {/* Revealed section content on the warm brown field with 09-cafe-furniture backdrop */}
+        <div data-slipstream-copy className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 text-cream">
+          <div className="space-y-3">
+            <span className="inline-block px-3.5 py-1 text-xs font-semibold tracking-wider uppercase rounded-full bg-cream/15 text-cream border border-cream/20 font-sans">
               Welcome to the Hub
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-cream tracking-tight leading-tight">
+            <h2 className="font-serif font-bold text-cream tracking-tight leading-tight">
               Everything you need between classes.
             </h2>
-            <p className="text-sm sm:text-base text-cream/85 font-sans leading-relaxed">
+            <p className="text-sm sm:text-base text-cream/85 font-sans leading-relaxed max-w-2xl">
               Serving the COMSATS campus community with quick pickup, freshly prepared meal platters, and quality semester stationery.
             </p>
           </div>
 
-          {/* 3 Feature Columns */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 pt-2">
-            {/* Column 1: Food & Drink */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-cream/10 border border-cream/15 backdrop-blur-xs flex flex-col justify-between space-y-4 hover:border-orange/60 transition-colors">
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-xl bg-orange/20 text-orange flex items-center justify-center">
-                  <Coffee className="w-6 h-6 text-cream" />
-                </div>
-                <h3 className="font-serif text-xl font-bold text-cream">
-                  Breakfast, lunch & fast food
-                </h3>
-                <p className="text-xs sm:text-sm text-cream/80 leading-relaxed font-sans">
-                  Steaming karak chai, morning parathas, hot biryani lunches, and quick crispy burgers ready fresh.
-                </p>
+          {/* 3 Feature Columns using data-slipstream-features and data-slipstream-feature */}
+          <div data-slipstream-features>
+            {/* Column 01: Food & Drink */}
+            <div data-slipstream-feature className="space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-orange/20 text-orange flex items-center justify-center mb-1">
+                <Coffee className="w-5 h-5 text-cream" />
               </div>
+              <h3 className="font-serif">
+                <span data-slipstream-no>01</span>Breakfast, lunch & fast food
+              </h3>
+              <p>
+                Steaming karak chai, morning parathas, hot biryani lunches, and quick crispy burgers ready fresh daily.
+              </p>
               <div className="text-xs font-semibold text-orange flex items-center gap-1 pt-1">
                 <span>Serving daily from 8:00 AM</span>
               </div>
             </div>
 
-            {/* Column 2: Stationery */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-cream/10 border border-cream/15 backdrop-blur-xs flex flex-col justify-between space-y-4 hover:border-orange/60 transition-colors">
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-xl bg-green/20 text-green flex items-center justify-center">
-                  <BookOpen className="w-6 h-6 text-cream" />
-                </div>
-                <h3 className="font-serif text-xl font-bold text-cream">
-                  Stationery on the same order
-                </h3>
-                <p className="text-xs sm:text-sm text-cream/80 leading-relaxed font-sans">
-                  Lecture registers, engineering notebooks, ballpoints, lab manuals, and exam supplies at Counter #1.
-                </p>
+            {/* Column 02: Stationery */}
+            <div data-slipstream-feature className="space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-green/20 text-green flex items-center justify-center mb-1">
+                <BookOpen className="w-5 h-5 text-cream" />
               </div>
+              <h3 className="font-serif">
+                <span data-slipstream-no>02</span>Stationery on the same order
+              </h3>
+              <p>
+                Lecture registers, engineering notebooks, ballpoints, lab manuals, and exam supplies ready at Counter #1.
+              </p>
               <div className="text-xs font-semibold text-orange flex items-center gap-1 pt-1">
                 <span>One-stop student checkout</span>
               </div>
             </div>
 
-            {/* Column 3: Pre-order */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-cream/10 border border-cream/15 backdrop-blur-xs flex flex-col justify-between space-y-4 hover:border-orange/60 transition-colors">
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-xl bg-cream/20 text-cream flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-cream" />
-                </div>
-                <h3 className="font-serif text-xl font-bold text-cream">
-                  Pre-order and skip the queue
-                </h3>
-                <p className="text-xs sm:text-sm text-cream/80 leading-relaxed font-sans">
-                  Place orders ahead of time and grab your meal or stationery during your 10-minute lecture breaks.
-                </p>
+            {/* Column 03: Pre-order */}
+            <div data-slipstream-feature className="space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-cream/20 text-cream flex items-center justify-center mb-1">
+                <Clock className="w-5 h-5 text-cream" />
               </div>
+              <h3 className="font-serif">
+                <span data-slipstream-no>03</span>Pre-order and skip the queue
+              </h3>
+              <p>
+                Place orders ahead of time and grab your meal or stationery during your 10-minute lecture breaks.
+              </p>
               <div className="text-xs font-semibold text-orange flex items-center gap-1 pt-1">
                 <span>Express pickup counter</span>
               </div>
@@ -567,7 +664,7 @@ export function HeroPortal() {
           </div>
 
           {/* Bestsellers image grid with Add buttons */}
-          <div className="pt-6 space-y-4">
+          <div className="w-full pt-4 space-y-4">
             <div className="flex items-center justify-between border-b border-cream/20 pb-3">
               <div>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-cream">Campus Favorites</h3>
@@ -585,7 +682,7 @@ export function HeroPortal() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-4 pt-4 pointer-events-auto">
+          <div className="flex flex-wrap items-center gap-4 pt-2 pointer-events-auto">
             <Link
               href="/shop"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-sans font-semibold text-sm sm:text-base bg-orange text-white hover:bg-orange-hover shadow-lg hover:shadow-xl transition-all duration-200 active:scale-[0.98]"
