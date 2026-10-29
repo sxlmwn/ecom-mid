@@ -100,19 +100,42 @@ html[data-hero-dark="true"] header[data-cui-navbar] .cui-mobile-toggle {
   color: #FFF8F0 !important;
 }
 
+html[data-hero-dark="true"] .card-nav__panel {
+  background: rgba(43, 27, 18, 0.95) !important;
+  border-color: rgba(255, 248, 240, 0.18) !important;
+}
+
+html[data-hero-dark="true"] .card-nav__menu {
+  color: #FFF8F0 !important;
+  background: rgba(255, 248, 240, 0.12) !important;
+}
+
+html[data-hero-dark="true"] .card-nav__line {
+  background: #FFF8F0 !important;
+}
+
 /* Transparent navbar when over the top of the hero */
 header[data-cui-navbar].cui-navbar-hero-top {
   background-color: transparent !important;
   border-bottom-color: transparent !important;
 }
 
-header[data-cui-navbar].cui-navbar-hero-top .cui-nav-title {
-  color: #FFF8F0 !important;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+/* CardNav floating pill maintains its cohesive high-contrast palette */
+.card-nav__panel .cui-nav-title {
+  color: #4B2E20 !important;
+  text-shadow: none !important;
 }
 
-header[data-cui-navbar].cui-navbar-hero-top .cui-nav-subtitle {
-  color: rgba(255, 248, 240, 0.8) !important;
+.card-nav__panel .cui-nav-subtitle {
+  color: rgba(43, 27, 18, 0.7) !important;
+}
+
+html[data-hero-dark="true"] .card-nav__panel .cui-nav-title {
+  color: #FFF8F0 !important;
+}
+
+html[data-hero-dark="true"] .card-nav__panel .cui-nav-subtitle {
+  color: rgba(255, 248, 240, 0.7) !important;
 }
 
 header[data-cui-navbar].cui-navbar-hero-top .cui-nav-link {

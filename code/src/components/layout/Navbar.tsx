@@ -3,18 +3,50 @@
 import React, { useState, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Coffee, ShoppingCart, Menu, X, Clock, MapPin } from "lucide-react";
+import { Coffee, ShoppingCart, Clock, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { useCart } from "@/context/CartContext";
+import CardNavComponent from "@/components/CardNav";
+import type { CardNavProps } from "@/types/card-nav";
 
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Shop", href: "/shop" },
-  { name: "Breakfast", href: "/breakfast" },
-  { name: "Lunch", href: "/lunch" },
-  { name: "Fast Food", href: "/fast-food" },
-  { name: "Stationery", href: "/stationery" },
-  { name: "Contact", href: "/contact" },
+const CardNav = CardNavComponent as unknown as React.ComponentType<CardNavProps>;
+
+const CARD_NAV_ITEMS = [
+  {
+    label: "Menu",
+    description: "Fresh campus meals & daily artisan brews",
+    bgColor: "#2B1B12", // deep espresso
+    textColor: "#FFF8F0", // cream
+    links: [
+      { label: "Breakfast Platters", href: "/breakfast", ariaLabel: "Breakfast Platters" },
+      { label: "Lunch & Biryani", href: "/lunch", ariaLabel: "Lunch & Biryani" },
+      { label: "Fast Food & Snacks", href: "/fast-food", ariaLabel: "Fast Food & Snacks" },
+      { label: "Hot & Chilled Beverages", href: "/beverages", ariaLabel: "Hot & Chilled Beverages" },
+    ],
+  },
+  {
+    label: "Shop",
+    description: "All 35 student items & academic stationery",
+    bgColor: "#F1E3D3", // soft tan
+    textColor: "#2B1B12", // deep espresso
+    links: [
+      { label: "All Products Catalogue", href: "/shop", ariaLabel: "All Products Catalogue" },
+      { label: "Popular Bestsellers", href: "/shop?bestseller=1", ariaLabel: "Popular Bestsellers" },
+      { label: "Academic Stationery", href: "/stationery", ariaLabel: "Academic Stationery" },
+    ],
+  },
+  {
+    label: "Cafe",
+    description: "COMSATS University student dining center",
+    bgColor: "#4B2E20", // coffee brown
+    textColor: "#FFF8F0", // cream
+    links: [
+      { label: "Home", href: "/", ariaLabel: "Home Page" },
+      { label: "Contact Us", href: "/contact", ariaLabel: "Contact CUI Cafe" },
+      { label: "Visit Us (Location)", href: "/contact", ariaLabel: "Visit Us Location" },
+      { label: "How to Order", href: "/#how-to-order", ariaLabel: "How to Order Guide" },
+    ],
+  },
 ];
 
 const emptySubscribe = () => () => {};
@@ -22,7 +54,6 @@ const emptySubscribe = () => () => {};
 export function Navbar() {
   const pathname = usePathname();
   const { totalCount } = useCart();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const mounted = useSyncExternalStore(
     emptySubscribe,
@@ -40,20 +71,52 @@ export function Navbar() {
   }, []);
 
   const displayCount = mounted ? totalCount : 0;
-
   const isHomeTop = pathname === "/" && !scrolled;
 
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    return pathname.startsWith(href);
-  };
+  const brandLogo = (
+    <div className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none">
+      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-coffee flex items-center justify-center text-cream shadow-xs group-hover:bg-orange transition-colors duration-200 shrink-0">
+        <Coffee className="w-4 h-4 sm:w-5 sm:h-5 text-cream" />
+      </div>
+      <div className="flex flex-col">
+        <span className="cui-nav-title font-serif text-lg sm:text-xl font-bold text-coffee tracking-tight group-hover:text-orange transition-colors duration-200 leading-none">
+          CUI Cafe
+        </span>
+        <span className="cui-nav-subtitle text-[9px] sm:text-[10px] text-espresso/70 font-sans uppercase tracking-widest mt-0.5 transition-colors duration-200 hidden sm:block">
+          Campus Dining & Store
+        </span>
+      </div>
+    </div>
+  );
+
+  const cartButton = (
+    <Link
+      href="/cart"
+      className={`cui-nav-cart relative p-2 sm:p-2.5 rounded-xl border border-tan transition-all duration-150 flex items-center justify-center cursor-pointer ${
+        pathname === "/cart"
+          ? "bg-tan text-coffee border-orange/40"
+          : "bg-white hover:bg-tan/40 text-coffee hover:border-coffee/30 shadow-2xs"
+      }`}
+      aria-label={`View Cart (${displayCount} items)`}
+      data-testid="nav-cart-btn"
+    >
+      <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-coffee transition-colors duration-200" />
+      <span
+        data-testid="nav-cart-count"
+        suppressHydrationWarning
+        className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-warm-orange text-cream text-[11px] font-bold rounded-full flex items-center justify-center shadow-xs transition-transform duration-200"
+      >
+        {displayCount}
+      </span>
+    </Link>
+  );
 
   return (
     <header
       data-cui-navbar
       className={`sticky top-0 z-50 transition-all duration-300 ${
         isHomeTop
-          ? "cui-navbar-hero-top bg-gradient-to-b from-[#2B1B12]/90 to-transparent border-transparent"
+          ? "cui-navbar-hero-top bg-gradient-to-b from-[#2B1B12]/85 to-transparent border-transparent"
           : "bg-cream/95 backdrop-blur-md border-b border-tan shadow-xs"
       }`}
     >
@@ -75,148 +138,25 @@ export function Navbar() {
         </Container>
       </div>
 
-      <Container>
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Brand Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none"
-            aria-label="CUI Cafe Homepage"
-          >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-coffee flex items-center justify-center text-cream shadow-xs group-hover:bg-orange transition-colors duration-200">
-              <Coffee className="w-5 h-5 sm:w-6 sm:h-6 text-cream" />
-            </div>
-            <div className="flex flex-col">
-              <span className="cui-nav-title font-serif text-xl sm:text-2xl font-bold text-coffee tracking-tight group-hover:text-orange transition-colors duration-200 leading-none">
-                CUI Cafe
-              </span>
-              <span className="cui-nav-subtitle text-[10px] sm:text-xs text-espresso/70 font-sans uppercase tracking-widest mt-0.5 transition-colors duration-200">
-                Campus Dining & Store
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main Navigation">
-            {navLinks.map((link) => {
-              const active = isActive(link.href);
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`cui-nav-link px-3 py-2 rounded-xl text-sm font-medium transition-all duration-150 relative ${
-                    active
-                      ? "cui-nav-link-active text-orange bg-tan/70 font-semibold shadow-xs"
-                      : "text-espresso/80 hover:text-coffee hover:bg-tan/30"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Right actions: Cart & Mobile toggle */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Cart Button */}
-            <Link
-              href="/cart"
-              className={`cui-nav-cart relative p-2.5 rounded-xl border border-tan transition-all duration-150 flex items-center justify-center ${
-                isActive("/cart")
-                  ? "bg-tan text-coffee border-orange/40"
-                  : "bg-white hover:bg-tan/40 text-coffee hover:border-coffee/30 shadow-2xs"
-              }`}
-              aria-label={`View Cart (${displayCount} items)`}
-            >
-              <ShoppingCart className="w-5 h-5 text-coffee transition-colors duration-200" />
-              <span
-                data-testid="nav-cart-count"
-                suppressHydrationWarning
-                className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-warm-orange text-cream text-[11px] font-bold rounded-full flex items-center justify-center shadow-xs transition-transform duration-200"
-              >
-                {displayCount}
-              </span>
-            </Link>
-
-            {/* Mobile menu toggle */}
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="cui-mobile-toggle lg:hidden p-2.5 rounded-xl border border-tan bg-white hover:bg-tan/40 text-coffee transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-orange/30"
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-nav"
-              data-testid="mobile-menu-toggle"
-            >
-              {mobileMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
-            </button>
-          </div>
-        </div>
-      </Container>
-
-      {/* Mobile Slide-down Menu */}
-      {mobileMenuOpen && (
-        <nav
-          id="mobile-nav"
-          aria-label="Mobile Navigation"
-          data-testid="mobile-menu-dropdown"
-          className="lg:hidden border-t border-tan bg-cream px-4 pt-3 pb-6 shadow-lg animate-in slide-in-from-top-2 duration-200"
-        >
-          <div className="flex flex-col space-y-1">
-            {navLinks.map((link) => {
-              const active = isActive(link.href);
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between transition-colors ${
-                    active
-                      ? "bg-tan text-orange font-semibold shadow-xs"
-                      : "text-espresso/90 hover:bg-tan/40 hover:text-coffee"
-                  }`}
-                >
-                  <span>{link.name}</span>
-                  {active && (
-                    <span className="w-2 h-2 rounded-full bg-orange" />
-                  )}
-                </Link>
-              );
-            })}
-
-            <div className="pt-2 border-t border-tan/60 mt-2">
-              <Link
-                href="/cart"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between transition-colors ${
-                  isActive("/cart")
-                    ? "bg-tan text-orange font-semibold"
-                    : "text-espresso/90 hover:bg-tan/40 hover:text-coffee"
-                }`}
-              >
-                <span className="flex items-center gap-2">
-                  <ShoppingCart className="w-4 h-4 text-coffee" />
-                  <span>My Cart</span>
-                </span>
-                <span className="px-2 py-0.5 rounded-full bg-orange text-white text-xs font-bold">
-                  {displayCount} {displayCount === 1 ? "item" : "items"}
-                </span>
-              </Link>
-            </div>
-
-            {/* Mobile Cafe Info */}
-            <div className="mt-4 p-3 rounded-xl bg-tan/40 border border-tan/60 text-xs text-espresso/70 space-y-1">
-              <p className="font-semibold text-coffee">Campus Timings & Location:</p>
-              <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
-              <p>Student Center, COMSATS Islamabad</p>
-            </div>
-          </div>
-        </nav>
-      )}
+      {/* Main Bar with CardNav Component */}
+      <div className="py-2 px-3 sm:px-4 max-w-7xl mx-auto">
+        <CardNav
+          logo={brandLogo}
+          logoAlt="CUI Cafe"
+          logoHref="/"
+          baseColor="#FFF8F0"
+          menuColor="#4B2E20"
+          buttonBgColor="#E67E22"
+          buttonTextColor="#FFFFFF"
+          ease="power3.out"
+          items={CARD_NAV_ITEMS}
+          cartSlot={cartButton}
+          linkComponent={Link}
+          currentPath={pathname}
+          maxWidth="100%"
+          className="w-full"
+        />
+      </div>
     </header>
   );
 }
