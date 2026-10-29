@@ -20,6 +20,7 @@ interface CategoryPageTemplateProps {
   title: string;
   tagline: string;
   bannerImage: string;
+  extraSection?: React.ReactNode;
 }
 
 type FilterTag = "all" | "veg" | "spicy" | "bestseller";
@@ -30,6 +31,7 @@ export default function CategoryPageTemplate({
   title,
   tagline,
   bannerImage,
+  extraSection,
 }: CategoryPageTemplateProps) {
   const baseProducts = useMemo(
     () => getProductsByCategory(categorySlug),
@@ -116,6 +118,9 @@ export default function CategoryPageTemplate({
           </p>
         </Container>
       </section>
+
+      {/* Optional Interactive Category Showcase (Spiral, Masonry, etc.) */}
+      {extraSection}
 
       {/* 2. Main Catalogue Area */}
       <section className="py-10 sm:py-16">

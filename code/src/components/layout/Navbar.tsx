@@ -203,7 +203,7 @@ export function Navbar() {
                   <span>My Cart</span>
                 </span>
                 <span className="px-2 py-0.5 rounded-full bg-orange text-white text-xs font-bold">
-                  0 items
+                  {displayCount} {displayCount === 1 ? "item" : "items"}
                 </span>
               </Link>
             </div>

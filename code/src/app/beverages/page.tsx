@@ -1,5 +1,6 @@
 import React from "react";
 import CategoryPageTemplate from "@/components/categories/CategoryPageTemplate";
+import { BeveragesSpiralSection } from "@/components/categories/BeveragesSpiralSection";
 
 export const metadata = {
   title: "Beverages & Coffee | CUI Cafe",
@@ -14,6 +15,7 @@ export default function BeveragesPage() {
       title="Hot & Chilled Beverages"
       tagline="Aromatic karak doodh patti chai, rich espresso coffees, iced lattes, and invigorating mint coolers crafted daily."
       bannerImage="/images/final-web/25-coffee-2.webp"
+      extraSection={<BeveragesSpiralSection />}
     />
   );
 }

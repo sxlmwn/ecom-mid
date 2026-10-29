@@ -19,6 +19,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import ProductCard from "@/components/products/ProductCard";
 import { getBestsellers } from "@/data/products";
+import { CampusCombosSection } from "@/components/home/CampusCombosSection";
 
 const CATEGORIES = [
   {
@@ -191,6 +192,9 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      {/* 3.5. Interactive FlipCard Student Combos */}
+      <CampusCombosSection />
 
       {/* 4. How to Order */}
       <section className="py-16 sm:py-24 bg-cream">

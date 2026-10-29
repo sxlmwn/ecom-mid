@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { CampusDomeSection } from "@/components/contact/CampusDomeSection";
 
 export const metadata = {
   title: "Contact Us | CUI Cafe • COMSATS University Islamabad",
@@ -191,6 +192,9 @@ export default function ContactPage() {
           </div>
         </Container>
       </section>
+
+      {/* 3. 360° Interactive Campus Cafe Atmosphere Dome */}
+      <CampusDomeSection />
     </div>
   );
 }

@@ -431,10 +431,11 @@ export default function CartPage() {
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-coffee block">
+                      <label htmlFor="checkout-name" className="text-xs font-semibold text-coffee block">
                         Full Name *
                       </label>
                       <input
+                        id="checkout-name"
                         type="text"
                         value={name}
                         onChange={(e) => {
@@ -450,10 +451,11 @@ export default function CartPage() {
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-coffee block">
+                      <label htmlFor="checkout-student-id" className="text-xs font-semibold text-coffee block">
                         Student / Faculty ID (Optional)
                       </label>
                       <input
+                        id="checkout-student-id"
                         type="text"
                         value={studentId}
                         onChange={(e) => setStudentId(e.target.value)}
@@ -463,10 +465,11 @@ export default function CartPage() {
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-coffee block">
+                      <label htmlFor="checkout-phone" className="text-xs font-semibold text-coffee block">
                         Phone / WhatsApp *
                       </label>
                       <input
+                        id="checkout-phone"
                         type="tel"
                         value={phone}
                         onChange={(e) => {
@@ -482,10 +485,11 @@ export default function CartPage() {
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-coffee block">
+                      <label htmlFor="checkout-location" className="text-xs font-semibold text-coffee block">
                         Pickup / Delivery Spot *
                       </label>
                       <select
+                        id="checkout-location"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         className="w-full px-3.5 py-2 rounded-xl border border-tan bg-tan/20 text-xs sm:text-sm text-espresso focus:outline-none focus:border-orange"
@@ -499,10 +503,11 @@ export default function CartPage() {
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-coffee block">
+                      <label htmlFor="checkout-notes" className="text-xs font-semibold text-coffee block">
                         Order Notes (Optional)
                       </label>
                       <input
+                        id="checkout-notes"
                         type="text"
                         value={notes}
                         onChange={(e) => setNotes(e.target.value)}

@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import ShopHeader from "@/components/shop/ShopHeader";
 import ShopClient from "@/components/shop/ShopClient";
+import { CampusDriftStream } from "@/components/shop/CampusDriftStream";
 import { Container } from "@/components/ui/Container";
 import { ProductSkeletonGrid } from "@/components/products/ProductGrid";
 
@@ -25,6 +26,7 @@ export default function ShopPage() {
   return (
     <main className="min-h-screen bg-cream">
       <ShopHeader />
+      <CampusDriftStream />
       <Suspense fallback={<ShopLoading />}>
         <ShopClient />
       </Suspense>

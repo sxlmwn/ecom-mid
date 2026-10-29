@@ -1,5 +1,6 @@
 import React from "react";
 import CategoryPageTemplate from "@/components/categories/CategoryPageTemplate";
+import { FastFoodMasonrySection } from "@/components/categories/FastFoodMasonrySection";
 
 export const metadata = {
   title: "Fast Food Menu | CUI Cafe",
@@ -14,6 +15,7 @@ export default function FastFoodPage() {
       title="Fast Food & Snacks"
       tagline="Crispy zinger burgers, beef smash burgers, hot pizza slices, crispy wings, and loaded fries ready fast between classes."
       bannerImage="/images/final-web/18-burger-2.webp"
+      extraSection={<FastFoodMasonrySection />}
     />
   );
 }

@@ -16,14 +16,15 @@ import {
   BookOpen,
   LayoutGrid,
   SearchX,
+  Sparkles,
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { products as allProducts, getBestsellers } from "@/data/products";
 import { categories } from "@/data/categories";
 import ProductGrid from "@/components/products/ProductGrid";
+import ExpandableCardDemo from "@/components/expandable-card-demo-grid";
 import PopularRow from "./PopularRow";
 import BackToTop from "./BackToTop";
-import ShopToast from "./ShopToast";
 
 type SortOption = "featured" | "price-asc" | "price-desc" | "rating" | "name-asc";
 
@@ -493,15 +494,33 @@ export default function ShopClient() {
           </motion.div>
         )}
 
+        {/* Chef's Signature Specials & Stories (Interactive Expandable Cards) */}
+        <section className="mt-14 pt-10 border-t border-tan/80">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+            <div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange/15 text-orange text-xs font-semibold tracking-wider uppercase mb-1">
+                <Sparkles className="w-3.5 h-3.5 text-orange" /> Kitchen Stories
+              </span>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-coffee tracking-tight">
+                Chef&apos;s Handcrafted Specials
+              </h2>
+              <p className="text-xs sm:text-sm text-espresso/70 mt-1 max-w-xl font-sans">
+                Click any dish to expand its kitchen story, secret ingredients, and instant tray ordering.
+              </p>
+            </div>
+            <span className="text-xs font-semibold text-coffee/70 bg-tan/40 px-3 py-1 rounded-xl border border-tan/60 self-start sm:self-auto">
+              Interactive Expansion Cards
+            </span>
+          </div>
+          <ExpandableCardDemo />
+        </section>
+
         {/* Popular Right Now Carousel */}
         <PopularRow products={bestsellerList} />
       </Container>
 
       {/* Back to top floating button */}
       <BackToTop />
-
-      {/* Floating cart toast listener */}
-      <ShopToast />
     </div>
   );
 }
