@@ -36,7 +36,8 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-200 bg-cream/95 backdrop-blur-md border-b border-tan ${
+      data-cui-navbar
+      className={`sticky top-0 z-50 transition-all duration-300 bg-cream/95 backdrop-blur-md border-b border-tan ${
         scrolled ? "shadow-sm" : ""
       }`}
     >
@@ -70,10 +71,10 @@ export function Navbar() {
               <Coffee className="w-5 h-5 sm:w-6 sm:h-6 text-cream" />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-xl sm:text-2xl font-bold text-coffee tracking-tight group-hover:text-orange transition-colors duration-200 leading-none">
+              <span className="cui-nav-title font-serif text-xl sm:text-2xl font-bold text-coffee tracking-tight group-hover:text-orange transition-colors duration-200 leading-none">
                 CUI Cafe
               </span>
-              <span className="text-[10px] sm:text-xs text-espresso/70 font-sans uppercase tracking-widest mt-0.5">
+              <span className="cui-nav-subtitle text-[10px] sm:text-xs text-espresso/70 font-sans uppercase tracking-widest mt-0.5 transition-colors duration-200">
                 Campus Dining & Store
               </span>
             </div>
@@ -87,9 +88,9 @@ export function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-3 py-2 rounded-xl text-sm font-medium transition-all duration-150 relative ${
+                  className={`cui-nav-link px-3 py-2 rounded-xl text-sm font-medium transition-all duration-150 relative ${
                     active
-                      ? "text-orange bg-tan/70 font-semibold shadow-xs"
+                      ? "cui-nav-link-active text-orange bg-tan/70 font-semibold shadow-xs"
                       : "text-espresso/80 hover:text-coffee hover:bg-tan/30"
                   }`}
                 >
@@ -104,14 +105,14 @@ export function Navbar() {
             {/* Cart Button */}
             <Link
               href="/cart"
-              className={`relative p-2.5 rounded-xl border border-tan transition-all duration-150 flex items-center justify-center ${
+              className={`cui-nav-cart relative p-2.5 rounded-xl border border-tan transition-all duration-150 flex items-center justify-center ${
                 isActive("/cart")
                   ? "bg-tan text-coffee border-orange/40"
                   : "bg-white hover:bg-tan/40 text-coffee hover:border-coffee/30 shadow-2xs"
               }`}
               aria-label="View Cart (0 items)"
             >
-              <ShoppingCart className="w-5 h-5 text-coffee" />
+              <ShoppingCart className="w-5 h-5 text-coffee transition-colors duration-200" />
               <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-orange text-white text-[11px] font-bold rounded-full flex items-center justify-center shadow-xs">
                 0
               </span>
@@ -121,7 +122,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl border border-tan bg-white hover:bg-tan/40 text-coffee transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-orange/30"
+              className="cui-mobile-toggle lg:hidden p-2.5 rounded-xl border border-tan bg-white hover:bg-tan/40 text-coffee transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-orange/30"
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav"

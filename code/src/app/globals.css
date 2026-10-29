@@ -56,3 +56,46 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 10px 25px -3px rgba(75, 46, 32, 0.1);
   border-color: #E67E22;
 }
+
+/* Dynamic Navbar adaptations when over dark portal reveal */
+html[data-hero-dark="true"] header[data-cui-navbar] {
+  background-color: rgba(43, 27, 18, 0.95) !important;
+  border-bottom-color: rgba(255, 248, 240, 0.15) !important;
+}
+
+html[data-hero-dark="true"] header[data-cui-navbar] .cui-nav-title {
+  color: #FFF8F0 !important;
+}
+
+html[data-hero-dark="true"] header[data-cui-navbar] .cui-nav-subtitle {
+  color: rgba(255, 248, 240, 0.7) !important;
+}
+
+html[data-hero-dark="true"] header[data-cui-navbar] .cui-nav-link {
+  color: rgba(255, 248, 240, 0.85) !important;
+}
+
+html[data-hero-dark="true"] header[data-cui-navbar] .cui-nav-link:hover {
+  color: #E67E22 !important;
+  background-color: rgba(255, 248, 240, 0.1) !important;
+}
+
+html[data-hero-dark="true"] header[data-cui-navbar] .cui-nav-link-active {
+  color: #E67E22 !important;
+  background-color: rgba(255, 248, 240, 0.15) !important;
+}
+
+html[data-hero-dark="true"] header[data-cui-navbar] .cui-nav-cart {
+  background-color: rgba(75, 46, 32, 0.85) !important;
+  border-color: rgba(255, 248, 240, 0.2) !important;
+}
+
+html[data-hero-dark="true"] header[data-cui-navbar] .cui-nav-cart svg {
+  color: #FFF8F0 !important;
+}
+
+html[data-hero-dark="true"] header[data-cui-navbar] .cui-mobile-toggle {
+  background-color: rgba(75, 46, 32, 0.85) !important;
+  border-color: rgba(255, 248, 240, 0.2) !important;
+  color: #FFF8F0 !important;
+}
