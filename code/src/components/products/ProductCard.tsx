@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Star, Clock, Plus, Flame, Sparkles, Award, Check } from "lucide-react";
 import { Product } from "@/data/products";
 import ProductImage from "@/components/ui/ProductImage";
-import { addToCartPlaceholder } from "@/lib/cart-placeholder";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
   product: Product;
@@ -14,6 +14,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, priority = false }: ProductCardProps) {
+  const { addToCart } = useCart();
   const [showPlusOne, setShowPlusOne] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
@@ -26,8 +27,8 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
     e.preventDefault();
     e.stopPropagation();
 
-    // Trigger placeholder handler
-    addToCartPlaceholder(product, 1);
+    // Trigger real cart state
+    addToCart(product, 1);
 
     // Show +1 pop animation
     setShowPlusOne(true);

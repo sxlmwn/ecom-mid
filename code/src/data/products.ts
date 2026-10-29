@@ -115,7 +115,7 @@ export const products: Product[] = [
     reviewCount: 88,
     tags: ["new", "veg"],
     stock: 30,
-    image: "/images/products/honey-pancake-stack.webp",
+    image: "/images/products-4k/honey-pancake-stack.webp",
   },
   {
     id: "prod-bf-06",
@@ -133,7 +133,7 @@ export const products: Product[] = [
     reviewCount: 64,
     tags: ["veg", "new"],
     stock: 25,
-    image: "/images/products/fruit-yogurt-bowl.webp",
+    image: "/images/products-4k/fruit-yogurt-bowl.webp",
   },
   {
     id: "prod-bf-07",
@@ -151,7 +151,7 @@ export const products: Product[] = [
     reviewCount: 92,
     tags: ["veg"],
     stock: 35,
-    image: "/images/products/cheese-croissant.webp",
+    image: "/images/products-4k/cheese-croissant.webp",
   },
 
   // ==========================================
@@ -174,7 +174,7 @@ export const products: Product[] = [
     reviewCount: 312,
     tags: ["bestseller", "spicy", "chef-pick"],
     stock: 75,
-    image: "/images/products/chicken-biryani.webp",
+    image: "/images/products-4k/chicken-biryani.webp",
   },
   {
     id: "prod-ln-02",
@@ -192,7 +192,7 @@ export const products: Product[] = [
     reviewCount: 164,
     tags: ["spicy", "chef-pick"],
     stock: 30,
-    image: "/images/products/chicken-karahi-plate.webp",
+    image: "/images/products-4k/chicken-karahi-plate.webp",
   },
   {
     id: "prod-ln-03",
@@ -265,7 +265,7 @@ export const products: Product[] = [
     reviewCount: 96,
     tags: ["new"],
     stock: 35,
-    image: "/images/products/creamy-chicken-pasta.webp",
+    image: "/images/products-4k/creamy-chicken-pasta.webp",
   },
   {
     id: "prod-ln-07",
@@ -283,7 +283,7 @@ export const products: Product[] = [
     reviewCount: 130,
     tags: ["spicy"],
     stock: 40,
-    image: "/images/products/chapli-kebab-plate.webp",
+    image: "/images/products-4k/chapli-kebab-plate.webp",
   },
 
   // ==========================================
@@ -306,7 +306,8 @@ export const products: Product[] = [
     reviewCount: 280,
     tags: ["bestseller", "spicy"],
     stock: 80,
-    image: "/images/products/zinger-burger.webp",
+    image: "/images/final-web/17-zinger-burger.webp",
+    gallery: ["/images/final-web/18-burger-2.webp", "/images/final-web/19-burger-3.webp"],
   },
   {
     id: "prod-ff-02",
@@ -324,7 +325,8 @@ export const products: Product[] = [
     reviewCount: 142,
     tags: ["chef-pick"],
     stock: 45,
-    image: "/images/products/beef-smash-burger.webp",
+    image: "/images/final-web/16-burger.webp",
+    gallery: ["/images/final-web/18-burger-2.webp", "/images/final-web/20-burger-4.webp"],
   },
   {
     id: "prod-ff-03",
@@ -342,7 +344,8 @@ export const products: Product[] = [
     reviewCount: 112,
     tags: ["bestseller"],
     stock: 50,
-    image: "/images/products/club-sandwich.webp",
+    image: "/images/products-4k/club-sandwich.webp",
+    gallery: ["/images/final-web/20-burger-4.webp"],
   },
   {
     id: "prod-ff-04",
@@ -360,7 +363,8 @@ export const products: Product[] = [
     reviewCount: 220,
     tags: ["bestseller", "spicy"],
     stock: 70,
-    image: "/images/products/loaded-fries.webp",
+    image: "/images/products-4k/loaded-fries.webp",
+    gallery: ["/images/final-web/19-burger-3.webp"],
   },
   {
     id: "prod-ff-05",
@@ -378,7 +382,7 @@ export const products: Product[] = [
     reviewCount: 185,
     tags: ["bestseller"],
     stock: 65,
-    image: "/images/products/chicken-shawarma.webp",
+    image: "/images/products-4k/chicken-shawarma.webp",
   },
   {
     id: "prod-ff-06",
@@ -397,7 +401,8 @@ export const products: Product[] = [
     reviewCount: 104,
     tags: ["spicy", "new"],
     stock: 40,
-    image: "/images/products/crispy-wings-6pcs.webp",
+    image: "/images/final-web/30-chicken-wings.webp",
+    gallery: ["/images/final-web/31-chicken-wings-2.webp", "/images/final-web/32-chicken-wings-3.webp"],
   },
   {
     id: "prod-ff-07",
@@ -415,7 +420,8 @@ export const products: Product[] = [
     reviewCount: 130,
     tags: ["chef-pick"],
     stock: 45,
-    image: "/images/products/fajita-pizza-slice.webp",
+    image: "/images/final-web/12-pizza-slice.webp",
+    gallery: ["/images/final-web/11-pizza.webp", "/images/final-web/13-pizza-2.webp", "/images/final-web/15-pizza-3.webp"],
   },
   {
     id: "prod-ff-08",
@@ -433,7 +439,8 @@ export const products: Product[] = [
     reviewCount: 78,
     tags: ["new"],
     stock: 50,
-    image: "/images/products/chicken-nuggets-8pcs.webp",
+    image: "/images/products-4k/chicken-nuggets-8pcs.webp",
+    gallery: ["/images/final-web/31-chicken-wings-2.webp"],
   },
 
   // ==========================================
@@ -455,7 +462,8 @@ export const products: Product[] = [
     reviewCount: 175,
     tags: ["bestseller", "veg"],
     stock: 90,
-    image: "/images/products/cappuccino.webp",
+    image: "/images/final-web/00-your-cappuccino-4k.webp",
+    gallery: ["/images/final-web/23-latte-art.webp", "/images/final-web/22-coffee.webp", "/images/final-web/25-coffee-2.webp"],
   },
   {
     id: "prod-bev-02",
@@ -473,7 +481,8 @@ export const products: Product[] = [
     reviewCount: 160,
     tags: ["bestseller", "veg"],
     stock: 85,
-    image: "/images/products/iced-latte.webp",
+    image: "/images/final-web/27-iced-coffee-2.webp",
+    gallery: ["/images/final-web/26-iced-coffee.webp", "/images/final-web/28-iced-coffee-3.webp"],
   },
   {
     id: "prod-bev-03",
@@ -491,7 +500,8 @@ export const products: Product[] = [
     reviewCount: 380,
     tags: ["bestseller", "veg", "chef-pick"],
     stock: 120,
-    image: "/images/products/doodh-patti-chai.webp",
+    image: "/images/final-web/21-chai.webp",
+    gallery: ["/images/final-web/24-mocha.webp"],
   },
   {
     id: "prod-bev-04",
@@ -509,7 +519,8 @@ export const products: Product[] = [
     reviewCount: 140,
     tags: ["veg"],
     stock: 70,
-    image: "/images/products/mint-margarita.webp",
+    image: "/images/products-4k/mint-margarita.webp",
+    gallery: ["/images/final-web/29-iced-cola.webp"],
   },
   {
     id: "prod-bev-05",
@@ -528,7 +539,8 @@ export const products: Product[] = [
     reviewCount: 125,
     tags: ["bestseller", "veg"],
     stock: 65,
-    image: "/images/products/cold-coffee.webp",
+    image: "/images/final-web/26-iced-coffee.webp",
+    gallery: ["/images/final-web/27-iced-coffee-2.webp", "/images/final-web/28-iced-coffee-3.webp"],
   },
   {
     id: "prod-bev-06",
@@ -546,7 +558,7 @@ export const products: Product[] = [
     reviewCount: 82,
     tags: ["veg", "new"],
     stock: 40,
-    image: "/images/products/fresh-orange-juice.webp",
+    image: "/images/products-4k/fresh-orange-juice.webp",
   },
 
   // ==========================================

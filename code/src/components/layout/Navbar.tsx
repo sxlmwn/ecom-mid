@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Coffee, ShoppingCart, Menu, X, Clock, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -16,18 +17,31 @@ const navLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
+const emptySubscribe = () => () => {};
+
 export function Navbar() {
   const pathname = usePathname();
+  const { totalCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const displayCount = mounted ? totalCount : 0;
+
+  const isHomeTop = pathname === "/" && !scrolled;
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -37,8 +51,10 @@ export function Navbar() {
   return (
     <header
       data-cui-navbar
-      className={`sticky top-0 z-50 transition-all duration-300 bg-cream/95 backdrop-blur-md border-b border-tan ${
-        scrolled ? "shadow-sm" : ""
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        isHomeTop
+          ? "cui-navbar-hero-top bg-gradient-to-b from-[#2B1B12]/90 to-transparent border-transparent"
+          : "bg-cream/95 backdrop-blur-md border-b border-tan shadow-xs"
       }`}
     >
       {/* Top micro-bar for university branding */}
@@ -110,11 +126,15 @@ export function Navbar() {
                   ? "bg-tan text-coffee border-orange/40"
                   : "bg-white hover:bg-tan/40 text-coffee hover:border-coffee/30 shadow-2xs"
               }`}
-              aria-label="View Cart (0 items)"
+              aria-label={`View Cart (${displayCount} items)`}
             >
               <ShoppingCart className="w-5 h-5 text-coffee transition-colors duration-200" />
-              <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-orange text-white text-[11px] font-bold rounded-full flex items-center justify-center shadow-xs">
-                0
+              <span
+                data-testid="nav-cart-count"
+                suppressHydrationWarning
+                className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-warm-orange text-cream text-[11px] font-bold rounded-full flex items-center justify-center shadow-xs transition-transform duration-200"
+              >
+                {displayCount}
               </span>
             </Link>
 

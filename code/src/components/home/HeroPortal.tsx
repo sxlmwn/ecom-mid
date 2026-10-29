@@ -1,16 +1,158 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Coffee, BookOpen, Clock, ArrowRight, ChevronDown } from "lucide-react";
+import { Coffee, BookOpen, Clock, ArrowRight, ChevronDown, Plus, Check } from "lucide-react";
 import GlyphPortal, { type GlyphPortalStyle } from "@/components/ui/glyph-portal";
+import { useCart } from "@/context/CartContext";
+import { getProductBySlug } from "@/data/products";
 
 const FONT_FAMILY = '"Poppins Portal", "Arial Black", Arial, sans-serif';
 let fontLoadPromise: Promise<void> | undefined;
 
+function subscribeReducedMotion(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mediaQuery.addEventListener("change", callback);
+  return () => mediaQuery.removeEventListener("change", callback);
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
+
+const HERO_BESTSELLERS = [
+  {
+    slug: "fajita-pizza-slice",
+    name: "Fajita Pizza Slice",
+    price: 280,
+    image: "/images/final-web/12-pizza-slice.webp",
+    category: "Fast Food",
+  },
+  {
+    slug: "zinger-burger",
+    name: "Zinger Burger",
+    price: 420,
+    image: "/images/final-web/17-zinger-burger.webp",
+    category: "Fast Food",
+  },
+  {
+    slug: "iced-latte",
+    name: "Iced Latte",
+    price: 300,
+    image: "/images/final-web/27-iced-coffee-2.webp",
+    category: "Beverages",
+  },
+  {
+    slug: "crispy-wings-6pcs",
+    name: "Crispy Wings (6 pcs)",
+    price: 450,
+    image: "/images/final-web/30-chicken-wings.webp",
+    category: "Fast Food",
+  },
+  {
+    slug: "doodh-patti-chai",
+    name: "Doodh Patti Chai",
+    price: 100,
+    image: "/images/final-web/21-chai.webp",
+    category: "Beverages",
+  },
+  {
+    slug: "cappuccino",
+    name: "Cappuccino",
+    price: 250,
+    image: "/images/final-web/00-your-cappuccino-4k.webp",
+    category: "Beverages",
+  },
+];
+
+function HeroBestsellerCard({
+  slug,
+  name,
+  price,
+  image,
+  category,
+}: {
+  slug: string;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+}) {
+  const { addToCart } = useCart();
+  const [justAdded, setJustAdded] = useState(false);
+  const fullProduct = getProductBySlug(slug);
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (fullProduct) {
+      addToCart(fullProduct, 1);
+      setJustAdded(true);
+      setTimeout(() => setJustAdded(false), 1200);
+    }
+  };
+
+  return (
+    <div className="group relative flex flex-col justify-between rounded-xl bg-cream/10 hover:bg-cream/15 border border-cream/15 hover:border-orange/60 p-2.5 transition-all duration-200">
+      <Link href={`/product/${slug}`} className="block focus:outline-none">
+        <div className="relative aspect-4/3 w-full rounded-lg overflow-hidden bg-coffee">
+          <Image
+            src={image}
+            alt={name}
+            fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 16vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <span className="absolute top-1.5 left-1.5 text-[9px] uppercase tracking-wider font-bold bg-[#2B1B12]/85 text-cream px-1.5 py-0.5 rounded-sm">
+            {category}
+          </span>
+        </div>
+        <div className="mt-2 space-y-0.5">
+          <h4 className="text-xs font-semibold text-cream line-clamp-1 group-hover:text-orange transition-colors">
+            {name}
+          </h4>
+          <p className="text-[11px] font-bold text-orange">PKR {price}</p>
+        </div>
+      </Link>
+      <button
+        onClick={handleAdd}
+        aria-label={`Add ${name} to cart`}
+        className={`mt-2 w-full py-1.5 px-2 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1 transition-all ${
+          justAdded
+            ? "bg-green text-cream"
+            : "bg-orange hover:bg-orange-hover text-cream active:scale-95 cursor-pointer"
+        }`}
+      >
+        {justAdded ? (
+          <>
+            <Check className="w-3 h-3" />
+            <span>Added</span>
+          </>
+        ) : (
+          <>
+            <Plus className="w-3 h-3" />
+            <span>Add</span>
+          </>
+        )}
+      </button>
+    </div>
+  );
+}
+
 export function HeroPortal() {
   const [fontFace, setFontFace] = useState<string | null>(null);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
 
   useEffect(() => {
     let settled = false;
@@ -74,6 +216,89 @@ export function HeroPortal() {
     );
   }
 
+  // Fallback for users preferring reduced motion
+  if (prefersReducedMotion) {
+    return (
+      <div className="relative w-full overflow-hidden bg-espresso text-cream py-16 sm:py-24">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <Image
+            src="/images/final-web/00-your-cafe-1-4k.webp"
+            alt="COMSATS University CUI Cafe"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2B1B12] via-[#4B2E20]/80 to-[#2B1B12]/90" />
+        </div>
+
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-4">
+            <span className="inline-block px-3.5 py-1 text-xs font-semibold tracking-wider uppercase rounded-full bg-cream/15 text-cream border border-cream/20">
+              COMSATS UNIVERSITY ISLAMABAD
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-serif font-bold text-cream tracking-tight">
+              CUI Cafe
+            </h1>
+            <p className="text-base sm:text-lg text-cream/85 font-sans">
+              Fresh food, hot coffee and campus essentials, all in one place.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+              <Link
+                href="/shop"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-sans font-semibold text-sm bg-orange text-cream hover:bg-orange-hover shadow-lg transition-all"
+              >
+                <span>Browse Menu</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-sans font-semibold text-sm border-2 border-cream text-cream hover:bg-cream hover:text-espresso transition-all"
+              >
+                <span>Contact Us</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="p-6 rounded-2xl bg-cream/10 border border-cream/15 space-y-3">
+              <Coffee className="w-6 h-6 text-orange" />
+              <h3 className="font-serif text-xl font-bold text-cream">Breakfast, lunch & fast food</h3>
+              <p className="text-xs sm:text-sm text-cream/80">Steaming karak chai, morning parathas, hot biryani lunches, and quick crispy burgers ready fresh.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-cream/10 border border-cream/15 space-y-3">
+              <BookOpen className="w-6 h-6 text-green" />
+              <h3 className="font-serif text-xl font-bold text-cream">Stationery on the same order</h3>
+              <p className="text-xs sm:text-sm text-cream/80">Lecture registers, engineering notebooks, ballpoints, lab manuals, and exam supplies at Counter #1.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-cream/10 border border-cream/15 space-y-3">
+              <Clock className="w-6 h-6 text-orange" />
+              <h3 className="font-serif text-xl font-bold text-cream">Pre-order and skip the queue</h3>
+              <p className="text-xs sm:text-sm text-cream/80">Place orders ahead of time and grab your meal or stationery during your 10-minute lecture breaks.</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 pt-4">
+            <div className="flex items-center justify-between border-b border-cream/20 pb-3">
+              <div>
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-cream">Campus Favorites</h3>
+                <p className="text-xs sm:text-sm text-cream/70 font-sans">Quick-order campus bestsellers ready for pickup</p>
+              </div>
+              <Link href="/shop" className="text-xs sm:text-sm text-orange hover:text-cream flex items-center gap-1 font-semibold transition-colors">
+                View all <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+              {HERO_BESTSELLERS.map((item) => (
+                <HeroBestsellerCard key={item.slug} {...item} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const portalStyles: GlyphPortalStyle = {
     "--gp-paper": "#FFF8F0",
     "--gp-ink": "#2B1B12",
@@ -87,7 +312,7 @@ export function HeroPortal() {
       <style>{`
         /* Scoped styling for CUI Cafe Glyph Portal */
         .cui-hero-container [data-gp-caption] {
-          inset: calc(var(--gp-word-bottom, 50%) + 76px) 24px auto;
+          inset: calc(var(--gp-word-bottom, 50%) + 130px) 24px auto;
           justify-content: center;
           z-index: 10;
         }
@@ -127,9 +352,12 @@ export function HeroPortal() {
           left: 50%;
           transform: translateX(-50%);
           z-index: 20;
+          max-width: calc(100vw - 32px);
+          padding: 0 8px;
         }
         .cui-hero-container [data-gp-select] {
           min-height: 42px;
+          max-width: 100%;
           padding: 0 14px;
           border-radius: 10px;
           border: 1px solid #F1E3D3;
@@ -155,11 +383,11 @@ export function HeroPortal() {
         }
         .cui-front-support {
           position: absolute;
-          inset: calc(var(--gp-word-bottom, 50%) + 24px) 24px auto;
+          inset: calc(var(--gp-word-bottom, 50%) + 20px) 24px auto;
           margin: 0;
           left: 50%;
           transform: translateX(-50%);
-          width: min(calc(100% - 48px), 44ch);
+          width: min(calc(100% - 48px), 46ch);
           text-align: center;
           font-family: var(--font-poppins), system-ui, sans-serif;
           font-size: clamp(14px, 1.8vw, 18px);
@@ -167,16 +395,28 @@ export function HeroPortal() {
           line-height: 1.5;
           color: #2B1B12;
         }
+        .cui-front-buttons {
+          position: absolute;
+          inset: calc(var(--gp-word-bottom, 50%) + 76px) 24px auto;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          z-index: 15;
+        }
         .cui-front-scroll {
           position: absolute;
-          inset: auto 24px 5%;
+          inset: auto 24px 4%;
           text-align: center;
           font-family: var(--font-poppins), system-ui, sans-serif;
           font-size: 12px;
           font-weight: 500;
           letter-spacing: 0.04em;
           color: #4B2E20;
-          opacity: 0.75;
+          opacity: 0.8;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -211,10 +451,10 @@ export function HeroPortal() {
         }}
         background={
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Real verified coffee photo from code/public/images/hero-coffee.jpg */}
+            {/* Primary 4K cafe image from content/final-4k/ */}
             <Image
-              src="/images/hero-coffee.jpg"
-              alt="Freshly brewed coffee at COMSATS University CUI Cafe"
+              src="/images/final-web/00-your-cafe-1-4k.webp"
+              alt="COMSATS University CUI Cafe Campus Hub"
               fill
               priority
               sizes="100vw"
@@ -228,11 +468,26 @@ export function HeroPortal() {
         front={
           <>
             <p className="cui-front-eyebrow">
-              COMSATS University Islamabad&apos;s own cafe
+              COMSATS UNIVERSITY ISLAMABAD
             </p>
             <p className="cui-front-support">
               Fresh food, hot coffee and campus essentials, all in one place.
             </p>
+            <div className="cui-front-buttons">
+              <Link
+                href="/shop"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans font-semibold text-xs sm:text-sm bg-orange text-cream hover:bg-orange-hover shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95 cursor-pointer"
+              >
+                <span>Browse Menu</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans font-semibold text-xs sm:text-sm border border-coffee/60 text-coffee hover:bg-coffee hover:text-cream transition-all duration-200 active:scale-95 bg-cream/90 backdrop-blur-xs shadow-xs cursor-pointer"
+              >
+                <span>Contact Us</span>
+              </Link>
+            </div>
             <div className="cui-front-scroll">
               <span>Scroll to step inside</span>
               <ChevronDown className="w-3.5 h-3.5 animate-bounce" />
@@ -263,7 +518,7 @@ export function HeroPortal() {
                   <Coffee className="w-6 h-6 text-cream" />
                 </div>
                 <h3 className="font-serif text-xl font-bold text-cream">
-                  Breakfast, lunch and fast food
+                  Breakfast, lunch & fast food
                 </h3>
                 <p className="text-xs sm:text-sm text-cream/80 leading-relaxed font-sans">
                   Steaming karak chai, morning parathas, hot biryani lunches, and quick crispy burgers ready fresh.
@@ -311,13 +566,31 @@ export function HeroPortal() {
             </div>
           </div>
 
+          {/* Bestsellers image grid with Add buttons */}
+          <div className="pt-6 space-y-4">
+            <div className="flex items-center justify-between border-b border-cream/20 pb-3">
+              <div>
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-cream">Campus Favorites</h3>
+                <p className="text-xs sm:text-sm text-cream/70 font-sans">Quick-order campus bestsellers ready for pickup</p>
+              </div>
+              <Link href="/shop" className="text-xs sm:text-sm text-orange hover:text-cream flex items-center gap-1 font-semibold transition-colors">
+                View all <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+              {HERO_BESTSELLERS.map((item) => (
+                <HeroBestsellerCard key={item.slug} {...item} />
+              ))}
+            </div>
+          </div>
+
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center gap-4 pt-4 pointer-events-auto">
             <Link
               href="/shop"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-sans font-semibold text-sm sm:text-base bg-orange text-white hover:bg-orange-hover shadow-lg hover:shadow-xl transition-all duration-200 active:scale-[0.98]"
             >
-              <span>Browse Menu</span>
+              <span>Explore All Categories</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
 
@@ -325,7 +598,7 @@ export function HeroPortal() {
               href="/contact"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-sans font-semibold text-sm sm:text-base border-2 border-cream text-cream hover:bg-cream hover:text-coffee transition-all duration-200 active:scale-[0.98]"
             >
-              <span>Contact Us</span>
+              <span>Visit Campus Cafe</span>
             </Link>
           </div>
         </div>

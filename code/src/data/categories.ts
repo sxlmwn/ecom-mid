@@ -45,7 +45,7 @@ export const categories: Category[] = [
     tagline: "Espresso coffees, chilled lemonades, shakes & signature chai",
     iconName: "CupSoda",
     accentColor: "#4B2E20", // coffee brown
-    route: "/shop?category=beverages",
+    route: "/beverages",
   },
   {
     slug: "stationery",

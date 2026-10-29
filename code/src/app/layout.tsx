@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import { Playfair_Display, Poppins } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { CartProvider } from "@/context/CartContext";
+import { GlobalCartToast } from "@/components/cart/GlobalCartToast";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -35,11 +37,14 @@ export default function RootLayout({
       className={`${playfair.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-espresso font-sans">
-        <Suspense fallback={<div className="h-20 bg-cream border-b border-tan" />}>
-          <Navbar />
-        </Suspense>
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Suspense fallback={<div className="h-20 bg-cream border-b border-tan" />}>
+            <Navbar />
+          </Suspense>
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <GlobalCartToast />
+        </CartProvider>
       </body>
     </html>
   );
