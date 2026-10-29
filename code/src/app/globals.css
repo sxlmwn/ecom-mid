@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-coffee: #4B2E20;
+  --color-coffee-dark: #372116;
+  --color-coffee-light: #5E3928;
+  --color-espresso: #2B1B12;
+  --color-cream: #FFF8F0;
+  --color-cream-light: #FFFBF5;
+  --color-orange: #E67E22;
+  --color-orange-hover: #D35400;
+  --color-tan: #F1E3D3;
+  --color-tan-light: #F8F1E8;
+  --color-green: #5B8C5A;
+  --color-green-dark: #466E45;
+
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-poppins), Poppins, system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-body: var(--font-poppins), Poppins, system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --background: #FFF8F0;
+  --foreground: #2B1B12;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FFF8F0;
+  color: #2B1B12;
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Card and component styling */
+.card-cafe {
+  background-color: #FFFFFF;
+  border: 1px solid #F1E3D3;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px -2px rgba(75, 46, 32, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.card-cafe:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -3px rgba(75, 46, 32, 0.1);
+  border-color: #E67E22;
+}

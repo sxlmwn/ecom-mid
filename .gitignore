@@ -1,0 +1,24 @@
+# Dependencies
+code/node_modules/
+node_modules/
+
+# Next.js build
+code/.next/
+.next/
+out/
+build/
+
+# Testing & Coverage
+coverage/
+
+# Misc
+.DS_Store
+.directory
+*.pem
+*.log
+.env*
+!.env.example
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
